@@ -12,4 +12,5 @@
     <string name="action_config">Configurações</string>
     <string name="nav_open">Abrir</string>
     <string name="nav_close">Fechar</string>
+    <string name="action_projeto">Novo projeto</string>
 </resources>

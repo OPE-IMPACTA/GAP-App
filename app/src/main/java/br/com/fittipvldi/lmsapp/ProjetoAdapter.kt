@@ -63,7 +63,7 @@ class ProjetoAdapter(
         holder.cardProgress.visibility = View.VISIBLE
 
         val context = holder.itemView.context
-        Picasso.with(context).load(projeto.img).fit().into(holder.cardImage,
+        Picasso.with(context).load(projeto.imagem).fit().into(holder.cardImage,
         // Picasso.with(context).load(projeto.foto).into(holder.cardImage,
                 object : com.squareup.picasso.Callback {
 

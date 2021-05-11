@@ -1,15 +1,26 @@
 package br.com.fittipvldi.lmsapp
 
 import android.graphics.drawable.Drawable
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.net.URL
 
 object ProjetoService {
 
-    val host = "link da API"
+    val host = "https://fittipvldi.pythonanywhere.com"
     val TAG = "WS_LMSApp"
 
-    //fun getProjetos(): List<Projeto> {
+    fun getProjetos(): List<Projeto> {
 
-    //var projetos = mutableListOf<Projeto>()
+        val url = "$host/projetos"
+        val json = HttpHelper.get(url)
+
+        Log.d(TAG, json)
+
+        var projetos = parserJson<List<Projeto>>(json)
+
+        return projetos
 
     //val clientes = listOf<String>("Bullest", "Santander", "Supera", "Banco Daycoval", "Banco Alpha")
     //var projetosNome = listOf<String>("Landpage", "Santander Caceis", "CRM4U", "Originals", "Alpha")
@@ -49,8 +60,15 @@ object ProjetoService {
     //projetos.add(d)
     //count++
     //}
-    //return projetos
+    }
 
-    //}
+    fun saveProjeto(projeto: Projeto) : String {
+        val json = HttpHelper.post("$host/projetos", projeto.toJson())
+        return json
+    }
 
+    inline fun <reified T> parserJson(json: String) : T{
+        val type = object: TypeToken<T>(){}.type
+        return Gson().fromJson<T>(json, type)
+    }
 }

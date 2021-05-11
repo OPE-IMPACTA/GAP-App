@@ -17,6 +17,11 @@
         android:title="@string/action_config"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/action_projeto"
+        android:title="@string/action_projeto"
+        app:showAsAction="never"
+        />
 </menu>
 
 <!--icons from https://github.com/google/material-design-icons-->

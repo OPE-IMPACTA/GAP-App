@@ -41,10 +41,16 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
     override fun onResume() {
         super.onResume()
-        projetos = ProjetoService.getProjetos()
-        recycler_projetos?.adapter = ProjetoAdapter(projetos) {
-            onClickProjeto(it)
-        }
+
+        Thread {
+            projetos = ProjetoService.getProjetos()
+
+            runOnUiThread{
+                recycler_projetos?.adapter = ProjetoAdapter(projetos) {
+                    onClickProjeto(it)
+                }
+            }
+        }.start()
     }
 
     fun onClickProjeto(projeto: Projeto) {
@@ -118,7 +124,12 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
             Toast.makeText(this, "Clicou em Configurações!", Toast.LENGTH_SHORT).show()
         } else if(id == android.R.id.home) {
             finish()
+        } else if(id == R.id.action_projeto){
+            val intent = Intent(this, ProjetoActivity::class.java)
+            startActivity(intent)
         }
+
+
         return  super.onOptionsItemSelected(item)
     }
 }
