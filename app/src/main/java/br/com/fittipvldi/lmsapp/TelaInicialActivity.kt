@@ -26,6 +26,9 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         val nome = params?.getString("nome")
         Toast.makeText(this, "Bem-vindo $nome", Toast.LENGTH_SHORT).show()
 
+        val nomeShared = Prefs.getString("nome_usuario")
+        Toast.makeText(this, "Valor em SharedPreferences: $nomeShared", Toast.LENGTH_SHORT).show()
+
         setSupportActionBar(toolbar)
 
         supportActionBar?.title = "Projetos"

@@ -20,7 +20,12 @@ class MainActivity : DebugActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_constraint)
         this.supportActionBar?.hide()
+
         imagem_login.setImageResource(R.drawable.logo_bullest_blue)
+
+        campo_usuario.setText(Prefs.getString("nome_usuario"))
+        campo_password.setText(Prefs.getString("senha"))
+        checkLogin.isChecked = Prefs.getBoolean("check_login")
 
         botao_login.setOnClickListener {
             progress_login.visibility = View.VISIBLE
@@ -30,6 +35,18 @@ class MainActivity : DebugActivity() {
 
             val nomeUsuario = campo_usuario.text.toString()
             val passwordUsuario = campo_password.text.toString()
+            val checkLogin = checkLogin.isChecked
+
+            if(checkLogin){
+                Prefs.setString("nome_usuario", nomeUsuario)
+                Prefs.setString("senha", passwordUsuario)
+                Prefs.setBoolean("check_login", checkLogin)
+            } else {
+                Prefs.setString("nome_usuario", "")
+                Prefs.setString("senha", "")
+            }
+            Prefs.setBoolean("check_login", checkLogin)
+
 
             if(nomeUsuario == user && passwordUsuario == password) {
                 Toast.makeText(this, "Login efetuado", Toast.LENGTH_SHORT).show()
