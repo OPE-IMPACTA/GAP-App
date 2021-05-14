@@ -26,7 +26,7 @@ class ProjetoActivity : AppCompatActivity() {
             p.imagem = textImagem
 
             Thread {
-                ProjetoService.saveProjeto(p)
+                ProjetoService.saveProjetoDB(p)
                 runOnUiThread{
                     finish()
                 }

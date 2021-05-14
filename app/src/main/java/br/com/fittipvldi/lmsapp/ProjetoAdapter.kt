@@ -80,7 +80,11 @@ class ProjetoAdapter(
                         holder.cardProgress.visibility = View.GONE
                     }
 
+
+
                 })
+
+        holder.itemView.setOnClickListener { onClick(projeto) }
 
     }
 

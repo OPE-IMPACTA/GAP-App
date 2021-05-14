@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val context: Context get() = this
+    private var REQUEST_REMOVE= 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,7 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         super.onResume()
 
         Thread {
-            projetos = ProjetoService.getProjetos()
+            projetos = ProjetoService.getProjetosDB()
 
             runOnUiThread{
                 recycler_projetos?.adapter = ProjetoAdapter(projetos) {
@@ -57,7 +58,11 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
     }
 
     fun onClickProjeto(projeto: Projeto) {
+        val intent = Intent(this, DetalheProjeto::class.java)
+        intent.putExtra("projeto", projeto)
+
         Toast.makeText(this, "Clicou projeto ${projeto.nome}", Toast.LENGTH_SHORT).show()
+        startActivityForResult(intent, REQUEST_REMOVE)
     }
 
     private fun confuguraMenuLateral() {
@@ -131,7 +136,6 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
             val intent = Intent(this, ProjetoActivity::class.java)
             startActivity(intent)
         }
-
 
         return  super.onOptionsItemSelected(item)
     }

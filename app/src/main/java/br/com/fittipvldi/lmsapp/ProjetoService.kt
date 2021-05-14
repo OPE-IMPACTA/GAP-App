@@ -62,9 +62,26 @@ object ProjetoService {
     //}
     }
 
+    fun getProjetosDB(): List<Projeto> {
+        val dao = DatabaseManager.getProjetoDAO()
+        return dao.findAll()
+    }
+
     fun saveProjeto(projeto: Projeto) : String {
         val json = HttpHelper.post("$host/projetos", projeto.toJson())
         return json
+    }
+
+    fun saveProjetoDB(projeto: Projeto): String {
+        val dao = DatabaseManager.getProjetoDAO()
+        dao.insert(projeto)
+
+        return "OK"
+    }
+
+    fun removeProjetoDB(projeto: Projeto) {
+        val dao = DatabaseManager.getProjetoDAO()
+        dao.delete(projeto)
     }
 
     inline fun <reified T> parserJson(json: String) : T{

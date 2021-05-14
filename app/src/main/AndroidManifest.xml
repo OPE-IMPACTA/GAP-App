@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LMSApp">
-        <activity android:name=".ProjetoActivity"></activity>
+        <activity android:name=".DetalheProjeto"></activity>
+        <activity android:name=".ProjetoActivity" />
         <activity android:name=".LocalizacaoActivity" />
         <activity android:name=".SobreActivity" />
         <activity android:name=".RelatoriosActivity" />
