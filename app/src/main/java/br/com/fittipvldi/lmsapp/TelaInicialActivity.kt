@@ -53,6 +53,12 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
                 recycler_projetos?.adapter = ProjetoAdapter(projetos) {
                     onClickProjeto(it)
                 }
+
+                val intent = Intent(this, DetalheProjeto::class.java)
+                intent.putExtra("projeto", this.projetos.get(0))
+
+                NotificationUtil.create(1, intent, "GAPApp", "Você tem um novo projeto!")
+
             }
         }.start()
     }
